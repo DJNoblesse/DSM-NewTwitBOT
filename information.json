@@ -1,0 +1,10 @@
+{
+  "server_port" : 58182,
+  "autobot_password" : "AUTOBOT_PASSWORD_HERE",
+  "manualbot_password" : "MANUALBOT_PASSWORD_HERE",
+  "twitter_consumer_key" : "TWITTER_CONSUMER_KEY_HERE",
+  "twitter_consumer_secret" : "TWITTER_CONSUMER_SECRET_HERE",
+  "twitter_token_key" : "TWITTER_TOKEN_KEY_HERE",
+  "twitter_token_secret" : "TWITTER_TOKEN_SECRET_HERE",
+  "abuseipdb_api_token" : "ABUSEIPDB_TOKEN_HERE"
+}
