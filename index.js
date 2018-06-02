@@ -74,8 +74,6 @@ app.post('/manualNotice', (req, res) => {
     if (req.body.botPassword === information.manualbot_password) {
         let message = req.body.manualMessage;
 
-        console.log(req.body.manualMessage + '/' + message);
-
         bot.tweet('관리자 알림 : ' + message);
         res.json({echo: message, message: 'Request sent. check your account.'});
     } else {
