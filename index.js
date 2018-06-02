@@ -1,5 +1,9 @@
-const information = require('./information.json');
+'use strict';
 
+//되도록 절대경로로 입력하는 걸 권장한다. 스크립트 폴더에서 pwd 입력으로 확인 가능. (상대경로 입력 시 작업 스케줄러로 실행할 때 파일을 못 찾아올 수 있음)
+const information = require('/path/to/your/information.json');
+
+require('date-utils');
 const twitterBot = require('node-twitterbot').TwitterBot;
 const request = require('request');
 const app = require('express')();
@@ -13,7 +17,8 @@ const bot = new twitterBot({
     "access_token_secret": information.twitter_token_secret
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // DSM SMS알림 기능으로 사용할 봇
 app.post('/autobot', (req, res) => {
@@ -60,7 +65,7 @@ app.post('/autobot', (req, res) => {
             res.json({echo: message, message: 'Request sent. check your account.'});
         }
     } else {
-        res.body('저런! 서버가 당신의 요청을 꺼ㅡ억 해버렸죠?');
+        res.send('저런! 서버가 당신의 요청을 꺼ㅡ억 해버렸죠?');
     }
 });
 
@@ -69,10 +74,12 @@ app.post('/manualNotice', (req, res) => {
     if (req.body.botPassword === information.manualbot_password) {
         let message = req.body.manualMessage;
 
+        console.log(req.body.manualMessage + '/' + message);
+
         bot.tweet('관리자 알림 : ' + message);
-        res.json({echo: data, message: 'Request sent. check your account.'});
+        res.json({echo: message, message: 'Request sent. check your account.'});
     } else {
-        res.body('저런! 서버가 당신의 요청을 꺼ㅡ억 해버렸죠?');
+        res.send('저런! 서버가 당신의 요청을 꺼ㅡ억 해버렸죠?');
     }
 });
 
